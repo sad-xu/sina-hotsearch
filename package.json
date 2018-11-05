@@ -1,0 +1,16 @@
+{
+  "name": "sina-weibo-hotsearch",
+  "version": "1.0.0",
+  "description": "1.实时爬取新浪微博热搜榜 2.提供小程序接口服务",
+  "author": "xhc <1031568754@qq.com>",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "log4js": "^3.0.6"
+  }
+}
