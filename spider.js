@@ -1,5 +1,6 @@
 // 新浪微博热搜爬虫
 
+const CronJob = require('cron').CronJob
 const axios = require('axios')
 const log = require('./log.js').getLogger('err')
 
@@ -28,7 +29,7 @@ function saveData(d) {
 		},
 		{ upsert: true }
 	).then(res => {
-
+		console.log(`save successed in ${new Date()}`)
 	}).catch(err => {
 		log.error(d, err)
 	})
@@ -70,8 +71,13 @@ function webProcessData(data) {
 
 console.log('start...')
 
-setTimeout(function() {
+// 定时任务
+const job = new CronJob('0 */1 * * * *', function() {
 	getData()
-}, 3000)
+	// console.log(`doing in ${new Date()}`)
+})
+job.start()
+
+
 
 
