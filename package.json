@@ -1,18 +1,27 @@
 {
   "name": "sina-weibo-hotsearch",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "1.实时爬取新浪微博热搜榜 2.提供小程序接口服务",
   "author": "xhc <1031568754@qq.com>",
   "private": true,
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "dev-server": "node server.js",
+    "prod-server": "cross-env NODE_ENV=production node server.js",
+    "dev-spider": "node spider.js",
+    "prod-spider": "cross-env NODE_ENV=production node spider.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
     "cron": "^1.6.0",
+    "express": "^4.16.4",
     "log4js": "^3.0.6",
     "mongoose": "^5.3.9"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0"
   }
 }
