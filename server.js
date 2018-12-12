@@ -2,9 +2,15 @@
 const http = require('http')
 const express = require('express')
 const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
 
 const api = require('./router/api.js')
 
+
+mongoose.connect('mongodb://localhost/SINA', { useNewUrlParser: true })
+	.then(res => console.log('数据库连接成功'))
+	.catch(err => console.log(err))
+mongoose.Promise = global.Promise
 
 const app = express()
 app.use(bodyParser.json())

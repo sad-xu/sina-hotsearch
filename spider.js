@@ -29,7 +29,7 @@ function saveData(d) {
 		},
 		{ upsert: true }
 	).then(res => {
-		console.log(`save successed in ${new Date()}`)
+
 	}).catch(err => {
 		log.error(d, err)
 	})
