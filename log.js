@@ -5,7 +5,7 @@ const log4js = require('log4js')
 log4js.configure({
  "appenders": {
     "err": {
-      "type": "datefile",
+      "type": "dateFile",
       "filename": "logs/errors.log",
       // "layout": {
       // 	"type": "colored" 
