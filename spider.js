@@ -6,6 +6,7 @@ const log = require('./log.js').getLogger('err')
 
 const mongoose = require('mongoose')
 const Hotword = require('./model/hotword')
+const Timelineword = require('./model/Timelineword')
 
 // 微博国际版api
 // const APP_URL = 'http://overseas.weico.cc/portal.php?ct=feed&a=search_topic'
@@ -35,6 +36,18 @@ function saveData(d) {
 	})
 }
 
+// save 时间线数据
+function saveTimelinewords(data, time) {
+	Timelineword.create({
+		time,
+		data
+	}).then(res => {
+
+	}).catch(err => {
+		log.error(d, err)
+	})
+}
+
 
 // 获取数据
 function getData() {
@@ -55,15 +68,23 @@ function getData() {
 function webProcessData(data) {
 	if (data.ok !== 1) return log.error('error:', data)
 	let time = Math.floor(new Date().getTime() / 1000)
-	data.data.cards[0].card_group.forEach(item => {
+	let usefulData = data.data.cards[0].card_group.reduce((all, item) => {
 		if (item.desc_extr) {
-			saveData({
-				desc: item.desc, 
-				t: time, 
-				n: Number(item.desc_extr)
+			all.push({
+			 desc: item.desc, 
+			 n: Number(item.desc_extr) 
 			})
 		}
+		return all
+	}, [])
+	usefulData.forEach(item => {
+		saveData({
+			desc: item.desc, 
+			t: time, 
+			n: item.n
+		})
 	})
+	saveTimelinewords(usefulData, time)
 }
 
 
@@ -72,9 +93,9 @@ function webProcessData(data) {
 console.log('start...')
 
 // 定时任务
-const job = new CronJob('0 */1 * * * *', function() {
+const job = new CronJob('0 */5 * * * *', function() {
 	getData()
-	// console.log(`doing in ${new Date()}`)
+	console.log(`doing in ${new Date()}`)
 })
 job.start()
 

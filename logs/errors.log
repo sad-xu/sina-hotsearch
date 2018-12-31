@@ -1,130 +1,29 @@
-[2018-12-12T00:35:12.221] [ERROR] err - { Error: Client network socket disconnected before secure TLS connection was established
-    at TLSSocket.onConnectEnd (_tls_wrap.js:1092:19)
-    at Object.onceWrapper (events.js:273:13)
-    at TLSSocket.emit (events.js:187:15)
-    at endReadableNT (_stream_readable.js:1090:12)
-    at process._tickCallback (internal/process/next_tick.js:63:19)
-  code: 'ECONNRESET',
-  path: null,
-  host: 'm.weibo.cn',
-  port: 443,
-  localAddress: undefined,
-  config:
-   { adapter: [Function: httpAdapter],
-     transformRequest: { '0': [Function: transformRequest] },
-     transformResponse: { '0': [Function: transformResponse] },
-     timeout: 0,
-     xsrfCookieName: 'XSRF-TOKEN',
-     xsrfHeaderName: 'X-XSRF-TOKEN',
-     maxContentLength: -1,
-     validateStatus: [Function: validateStatus],
-     headers:
-      { Accept: 'application/json, text/plain, */*',
-        'User-Agent': 'axios/0.18.0' },
-     method: 'get',
-     url:
-      'https://m.weibo.cn/api/container/getIndex?containerid=106003type%3D25%26filter_type%3Drealtimehot',
-     data: undefined },
-  request:
-   Writable {
-     _writableState:
-      WritableState {
-        objectMode: false,
-        highWaterMark: 16384,
-        finalCalled: false,
-        needDrain: false,
-        ending: false,
-        ended: false,
-        finished: false,
-        destroyed: false,
-        decodeStrings: true,
-        defaultEncoding: 'utf8',
-        length: 0,
-        writing: false,
-        corked: 0,
-        sync: true,
-        bufferProcessing: false,
-        onwrite: [Function: bound onwrite],
-        writecb: null,
-        writelen: 0,
-        bufferedRequest: null,
-        lastBufferedRequest: null,
-        pendingcb: 0,
-        prefinished: false,
-        errorEmitted: false,
-        emitClose: true,
-        bufferedRequestCount: 0,
-        corkedRequestsFree: [Object] },
-     writable: true,
-     _events:
-      { response: [Function: handleResponse],
-        error: [Function: handleRequestError] },
-     _eventsCount: 2,
-     _maxListeners: undefined,
-     _options:
-      { protocol: 'https:',
-        maxRedirects: 21,
-        maxBodyLength: 10485760,
-        path:
-         '/api/container/getIndex?containerid=106003type%3D25%26filter_type%3Drealtimehot',
-        method: 'get',
-        headers: [Object],
-        agent: undefined,
-        auth: undefined,
-        hostname: 'm.weibo.cn',
-        port: null,
-        nativeProtocols: [Object],
-        pathname: '/api/container/getIndex',
-        search: '?containerid=106003type%3D25%26filter_type%3Drealtimehot' },
-     _redirectCount: 0,
-     _redirects: [],
-     _requestBodyLength: 0,
-     _requestBodyBuffers: [],
-     _onNativeResponse: [Function],
-     _currentRequest:
-      ClientRequest {
-        _events: [Object],
-        _eventsCount: 6,
-        _maxListeners: undefined,
-        output: [],
-        outputEncodings: [],
-        outputCallbacks: [],
-        outputSize: 0,
-        writable: true,
-        _last: true,
-        chunkedEncoding: false,
-        shouldKeepAlive: false,
-        useChunkedEncodingByDefault: false,
-        sendDate: false,
-        _removedConnection: false,
-        _removedContLen: false,
-        _removedTE: false,
-        _contentLength: 0,
-        _hasBody: true,
-        _trailer: '',
-        finished: true,
-        _headerSent: true,
-        socket: [TLSSocket],
-        connection: [TLSSocket],
-        _header:
-         'GET /api/container/getIndex?containerid=106003type%3D25%26filter_type%3Drealtimehot HTTP/1.1\r\nAccept: application/json, text/plain, */*\r\nUser-Agent: axios/0.18.0\r\nHost: m.weibo.cn\r\nConnection: close\r\n\r\n',
-        _onPendingData: [Function: noopPendingOutput],
-        agent: [Agent],
-        socketPath: undefined,
-        timeout: undefined,
-        method: 'GET',
-        path:
-         '/api/container/getIndex?containerid=106003type%3D25%26filter_type%3Drealtimehot',
-        _ended: false,
-        res: null,
-        aborted: undefined,
-        timeoutCb: null,
-        upgradeOrConnect: false,
-        parser: null,
-        maxHeadersCount: null,
-        _redirectable: [Circular],
-        [Symbol(isCorked)]: false,
-        [Symbol(outHeadersKey)]: [Object] },
-     _currentUrl:
-      'https://m.weibo.cn/api/container/getIndex?containerid=106003type%3D25%26filter_type%3Drealtimehot' },
-  response: undefined }
+[2018-12-31T18:07:01.000] [ERROR] err - TypeError: all.push is not a function
+    at data.data.cards.(anonymous function).card_group.reduce (E:\node\sina-weibo-hotsearch\spider.js:69:15)
+    at Array.reduce (<anonymous>)
+    at webProcessData (E:\node\sina-weibo-hotsearch\spider.js:67:49)
+    at axios.get.then.res (E:\node\sina-weibo-hotsearch\spider.js:53:5)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+[2018-12-31T18:08:00.760] [ERROR] err - TypeError: all.push is not a function
+    at data.data.cards.(anonymous function).card_group.reduce (E:\node\sina-weibo-hotsearch\spider.js:69:15)
+    at Array.reduce (<anonymous>)
+    at webProcessData (E:\node\sina-weibo-hotsearch\spider.js:67:49)
+    at axios.get.then.res (E:\node\sina-weibo-hotsearch\spider.js:53:5)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+[2018-12-31T18:09:00.748] [ERROR] err - TypeError: all.push is not a function
+    at data.data.cards.(anonymous function).card_group.reduce (E:\node\sina-weibo-hotsearch\spider.js:69:15)
+    at Array.reduce (<anonymous>)
+    at webProcessData (E:\node\sina-weibo-hotsearch\spider.js:67:49)
+    at axios.get.then.res (E:\node\sina-weibo-hotsearch\spider.js:53:5)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+[2018-12-31T18:10:00.759] [ERROR] err - TypeError: all.push is not a function
+    at data.data.cards.(anonymous function).card_group.reduce (E:\node\sina-weibo-hotsearch\spider.js:73:15)
+    at Array.reduce (<anonymous>)
+    at webProcessData (E:\node\sina-weibo-hotsearch\spider.js:71:49)
+    at axios.get.then.res (E:\node\sina-weibo-hotsearch\spider.js:57:5)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+[2018-12-31T18:12:01.184] [ERROR] err - ReferenceError: data is not defined
+    at saveTimelinewords (E:\node\sina-weibo-hotsearch\spider.js:43:3)
+    at webProcessData (E:\node\sina-weibo-hotsearch\spider.js:87:2)
+    at axios.get.then.res (E:\node\sina-weibo-hotsearch\spider.js:57:5)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
