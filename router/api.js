@@ -47,13 +47,13 @@ router.get('/search_by_keyword', (req, res) => {
 
 /**
  * 获取热搜历史数据
- * _id
+ * [_id1, _id2, ...]
  */
 router.post('/historydata_by_id', (req, res) => {
 	let _idArr = req.body._id
 	if (!(_idArr instanceof Array)) return retRes(res, [], 1, '_id in not Array')
 	if (!_idArr.length) return retRes(res, [], 2, '_id no content')	
-	Hotword.findById({ $in: _idArr }, { timeline: 1, desc: 1})
+	Hotword.find({ _id: { $in: _idArr } }, { timeline: 1, desc: 1})
 		.then(data => {
 			retRes(res, data)
 		})

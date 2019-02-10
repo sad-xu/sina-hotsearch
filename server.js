@@ -6,8 +6,9 @@ const mongoose = require('mongoose')
 
 const api = require('./router/api.js')
 
-
-mongoose.connect('mongodb://localhost/SINA', { useNewUrlParser: true })
+// mongodb://root:xhc151136@47.101.221.188:27017/SINA?authSource=admin
+// mongodb://localhost/SINA
+mongoose.connect('mongodb://root:xhc151136@47.101.221.188:27017/SINA?authSource=admin', { useNewUrlParser: true })
 	.then(res => console.log('数据库连接成功'))
 	.catch(err => console.log(err))
 mongoose.Promise = global.Promise
