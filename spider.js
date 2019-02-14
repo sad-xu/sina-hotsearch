@@ -1,5 +1,4 @@
 // 新浪微博热搜爬虫
-
 const CronJob = require('cron').CronJob
 const axios = require('axios')
 const log = require('./log.js').getLogger('err')
@@ -8,15 +7,14 @@ const mongoose = require('mongoose')
 const Hotword = require('./model/hotword')
 const Timelineword = require('./model/timelineword')
 
-const { DATABASE } = require('./config') 
-console.log(DATABASE)
+const CONFIG = require('./config') 
 // 微博国际版api
 // const APP_URL = 'http://overseas.weico.cc/portal.php?ct=feed&a=search_topic'
 
 // 微博移动端页面
 const WEB_URL = 'https://m.weibo.cn/api/container/getIndex?containerid=106003type%3D25%26filter_type%3Drealtimehot'
 
-mongoose.connect(DATABASE, { useNewUrlParser: true })
+mongoose.connect(CONFIG.DATABASE, { useNewUrlParser: true })
 	.then(res => console.log('数据库连接成功'))
 	.catch(err => console.log(err))
 mongoose.Promise = global.Promise
@@ -88,8 +86,6 @@ function webProcessData(data) {
 	})
 	saveTimelinewords(usefulData, time)
 }
-
-
 
 
 console.log('start...')

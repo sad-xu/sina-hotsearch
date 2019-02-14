@@ -1,11 +1,12 @@
 const express = require('express')
 const axios = require('axios')
 const router = express.Router()
-const Hotword = require('../model/hotword.js')
-const Timelineword = require('../model/timelineword.js')
+const Hotword = require('../model/hotword.js')						// 热搜表
+const Timelineword = require('../model/timelineword.js')  // 时序表
 
 const retRes = require('../utils/response.js')
 
+const client = require('../redis.js')
 
 /**
  * 获取系统时间 
@@ -30,7 +31,7 @@ router.get('/realtimehot', (req, res) => {
 })
 
 /**
- * 关键词搜索
+ * 关键词搜索 取最近的10条
  * keyword --> [{_id, desc}]
  */
 router.get('/search_by_keyword', (req, res) => {
@@ -39,7 +40,7 @@ router.get('/search_by_keyword', (req, res) => {
 	Hotword.find(
 		{ desc: { $regex: keyword, $options: '$i' } },
 		'_id desc'
-	).limit(10)
+	).sort({_id: -1}).limit(10)
 	.then(list => retRes(res, list))
 	.catch(err => retRes(res, err, 1, '查询出错'))
 })
