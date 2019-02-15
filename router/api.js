@@ -20,15 +20,53 @@ router.get('/systime', (req, res) => {
 /**
  * 获取当前热搜 
  * 取数据库最后一条
- * TODO: redis缓存2分钟的数据
+ * 缓存5分钟的数据
  */
 router.get('/realtimehot', (req, res) => {
-	Timelineword.find()
-		.sort({ time: -1 })
-		.limit(1)
-		.then(list => retRes(res, list[0]))
-		.catch(err => retRes(res, err, 1, '查询出错'))
+	client.get('realtimehot', (err, reply) => {
+		if (reply) {
+			retRes(res, JSON.parse(reply))
+		} else {
+			Timelineword.find()
+				.sort({ time: -1 })
+				.limit(1)
+				.then(list => {
+					let resData = list[0]
+					client.setex('realtimehot', 300, JSON.stringify(resData))
+					retRes(res, resData)
+				})
+				.catch(err => retRes(res, err, 1, '查询出错'))
+		}
+	})
 })
+
+
+/**
+ * 推荐
+ * 24小时前的数据
+ * 取前7条 缓存1小时
+ */
+router.get('/recommend', (req, res) => {
+	client.get('recommend', (err, reply) => {
+		if (reply) {
+			retRes(res, JSON.parse(reply))
+		} else {
+			let time =  Math.floor((new Date().getTime() - 86400000) / 1000)
+			Timelineword.find({ time: { $lt: time } }, { data: 1 })
+				.sort({ _id: -1 })
+				.limit(1)
+				.then(list => {
+					let resData = list[0]
+					if (resData.data) {
+						resData = resData.data.slice(0, 7)
+						client.setex('recommend', 3600, JSON.stringify(resData))
+						retRes(res, resData)
+					}
+				}).catch(err => retRes(res, err, 2, '查询出错'))
+		}
+	})
+})
+
 
 /**
  * 关键词搜索 取最近的10条
@@ -77,6 +115,7 @@ router.post('/historydata_by_desc', (req, res) => {
 		})
 		.catch(err => retRes(res, err, 2, '查询出错'))
 })
+
 
 
 module.exports = router
