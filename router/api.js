@@ -1,5 +1,4 @@
 const express = require('express')
-const axios = require('axios')
 const router = express.Router()
 const Hotword = require('../model/hotword.js')						// 热搜表
 const Timelineword = require('../model/timelineword.js')  // 时序表
@@ -17,6 +16,7 @@ router.get('/systime', (req, res) => {
 })
 
 
+
 /**
  * 获取当前热搜 
  * 取数据库最后一条
@@ -32,8 +32,10 @@ router.get('/realtimehot', (req, res) => {
 				.limit(1)
 				.then(list => {
 					let resData = list[0]
-					client.setex('realtimehot', 300, JSON.stringify(resData))
-					retRes(res, resData)
+					client.setex('realtimehot', 300, JSON.stringify(resData), err2 => {
+						if (!err2) return retRes(res, resData)
+						else return retRes(res, err, 3, 'redis err')
+					})
 				})
 				.catch(err => retRes(res, err, 1, '查询出错'))
 		}
@@ -59,8 +61,10 @@ router.get('/recommend', (req, res) => {
 					let resData = list[0]
 					if (resData.data) {
 						resData = resData.data.slice(0, 7)
-						client.setex('recommend', 3600, JSON.stringify(resData))
-						retRes(res, resData)
+						client.setex('recommend', 3600, JSON.stringify(resData), err2 => {
+							if (!err2) return retRes(res, resData)
+							else return retRes(res, err, 3, 'redis err')
+						})
 					}
 				}).catch(err => retRes(res, err, 2, '查询出错'))
 		}

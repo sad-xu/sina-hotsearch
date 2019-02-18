@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 
 const CONFIG = require('./config')  // 地址配置
 
+const permission = require('./router/permission.js')
 const api = require('./router/api.js')
 
 
@@ -18,6 +19,7 @@ const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 
+app.use('/', permission)
 app.use('/api', api)
 
 http.createServer(app).listen(8021, () => {
