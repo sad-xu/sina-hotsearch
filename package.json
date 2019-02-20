@@ -10,7 +10,8 @@
     "prod-server": "cross-env NODE_ENV=production node server.js",
     "dev-spider": "node spider.js",
     "prod-spider": "cross-env NODE_ENV=production node spider.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev-leadboard": "node leadboard.js",
+    "prod-leadboard": "cross-env NODE_ENV=production node leadboard.js"
   },
   "license": "ISC",
   "dependencies": {

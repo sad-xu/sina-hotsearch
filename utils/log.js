@@ -6,7 +6,7 @@ log4js.configure({
  "appenders": {
     "err": {
       "type": "dateFile",
-      "filename": "./logs/err.log",
+      "filename": "../logs/err.log",
     }
   },
   "categories": {

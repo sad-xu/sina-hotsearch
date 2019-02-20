@@ -3,8 +3,7 @@ const http = require('http')
 const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-
-const CONFIG = require('./config')  // 地址配置
+const CONFIG = require('./utils/config')
 
 const permission = require('./router/permission.js')
 const api = require('./router/api.js')

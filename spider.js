@@ -1,13 +1,13 @@
 // 新浪微博热搜爬虫
 const CronJob = require('cron').CronJob
 const axios = require('axios')
-const log = require('./log.js').getLogger('err')
+const log = require('./utils/log.js').getLogger('err')
 
 const mongoose = require('mongoose')
 const Hotword = require('./model/hotword')
 const Timelineword = require('./model/timelineword')
 
-const CONFIG = require('./config') 
+const CONFIG = require('./utils/config') 
 // 微博国际版api
 // const APP_URL = 'http://overseas.weico.cc/portal.php?ct=feed&a=search_topic'
 

@@ -39,5 +39,5 @@
  pm2 list
 
 pm2运行npm
- pm2 start npm -- run prod-spider 
+ pm2 start npm --name newname -- run prod-spider 
 

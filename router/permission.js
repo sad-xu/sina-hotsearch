@@ -1,7 +1,8 @@
 const router = require('express').Router()
 const crypto = require('crypto')
-const client = require('../redis.js')
 const axios = require('axios')
+const client = require('../utils/redis.js')
+const User = require('../model/user.js')  
 
 const retRes = require('../utils/response.js')
 
@@ -26,15 +27,17 @@ router.post('/login', (req, res) => {
     let { openid, errcode, errmsg, session_key } = wxRes.data
     if (!errcode) {  // 成功， 返回token
       const hash = crypto.createHash('md5')
-      hash.update(session_key + 'lsadjkfnsdjkcnfsdcs')
+      hash.update(session_key + 'lsadjkfnsdjkc11_312+SWQfnfsdcs')
       const token = hash.digest('hex')
-      // token  
-      /* 
-        1. 查找用户，若无，新增
-        2. token存入redis 2小时有效期
-
-        TODO: 设计用户数据库
-      */
+      // openid 查找用户，若无，新增
+      User.findOne({openid: openid}, user => {
+        if (!user) {
+          User.create({
+            openid: openid
+          })
+        }
+      })
+      // token存入redis 2小时有效期
       client.setex(token, 7200, openid, (err, rep) => {
         if (!err) return retRes(res, token)
         else return retRes(res, null, 2, 'redis err')

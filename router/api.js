@@ -5,7 +5,7 @@ const Timelineword = require('../model/timelineword.js')  // 时序表
 
 const retRes = require('../utils/response.js')
 
-const client = require('../redis.js')
+const client = require('../utils/redis.js')
 
 /**
  * 获取系统时间 
