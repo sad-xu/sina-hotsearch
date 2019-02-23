@@ -121,5 +121,36 @@ router.post('/historydata_by_desc', (req, res) => {
 })
 
 
+/**
+ * 排行榜
+ * type: 'week' | 'month' | 'all' 
+ * 
+ * {
+ *	 update: 1550938603471,
+ *	 data: [{desc, n},...]
+ * }
+ */
+const leadMap = {
+	week: 'leadofweek',
+	month: 'leadofmonth',
+	all: 'leadofall'
+}
+
+router.get('/leadboard', (req, res) => {
+	let { type = 'week' } = req.query
+	let key = leadMap[type]
+	if (key) {
+		client.get(key, (err, reply) => {
+			if (reply) {
+				retRes(res, JSON.parse(reply))
+			} else {
+				retRes(res, [])
+			}
+		})
+	} else {
+		retRes(res, '', 1, 'err key')
+	}
+})
+
 
 module.exports = router

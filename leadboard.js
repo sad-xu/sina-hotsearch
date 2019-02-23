@@ -44,7 +44,16 @@ function aggregate(key, time) {
     ]).then(res => {
       if (res instanceof Array && res.length > 0) {
         // save in redis
-        client.set(key, JSON.stringify(res), err => {
+        let retObj = {
+          update: new Date().getTime(),
+          data: res.map(item => {
+            return {
+              desc: item._id,
+              n: item.n
+            }
+          })
+        }
+        client.set(key, JSON.stringify(retObj), err => {
           resolve()
         })
       } else {

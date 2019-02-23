@@ -1,6 +1,6 @@
 {
   "name": "sina-weibo-hotsearch",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "1.实时爬取新浪微博热搜榜 2.提供小程序接口服务",
   "author": "xhc <1031568754@qq.com>",
   "private": true,
