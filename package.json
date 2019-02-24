@@ -11,7 +11,9 @@
     "dev-spider": "node spider.js",
     "prod-spider": "cross-env NODE_ENV=production node spider.js",
     "dev-leadboard": "node leadboard.js",
-    "prod-leadboard": "cross-env NODE_ENV=production node leadboard.js"
+    "prod-leadboard": "cross-env NODE_ENV=production node leadboard.js",
+    "dev-commitlog": "node commitlog.js",
+    "prod-commitlog": "cross-env NODE_ENV=production node commitlog.js"
   },
   "license": "ISC",
   "dependencies": {

@@ -153,4 +153,30 @@ router.get('/leadboard', (req, res) => {
 })
 
 
+/**
+ * commit log
+ * type  back | front
+ *
+ */
+const commitMap = {
+	back: 'logback',
+	front: 'logfront'
+}
+router.get('/commitlog', (req, res) => {
+	let { type = 'back' } = req.query
+	let key = commitMap[type]
+	if (key) {
+		client.get(key, (err, reply) => {
+			if (reply) {
+				retRes(res, JSON.parse(reply))
+			} else {
+				retRes(res, [])
+			}
+		})
+	} else {
+		retRes(res, '', 1, 'err key')
+	}
+})
+
+
 module.exports = router

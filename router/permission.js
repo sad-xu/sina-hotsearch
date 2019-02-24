@@ -30,7 +30,7 @@ router.post('/login', (req, res) => {
       hash.update(session_key + 'lsadjkfnsdjkc11_312+SWQfnfsdcs')
       const token = hash.digest('hex')
       // openid 查找用户，若无，新增
-      User.findOne({openid: openid}, user => {
+      User.findOne({openid: openid}, (err, user) => {
         if (!user) {
           User.create({
             openid: openid
