@@ -23,7 +23,7 @@
     前端：移动端页面 + PC端管理后台
     后端：nodejs + express + mongodb
     
-  Team Chart https://github.com/sad-xu/teamchat
+  Team Chat https://github.com/sad-xu/teamchat
     私人定制聊天及管理项目
     前端：管理后台
     后端：nodejs + express + mongodb
@@ -32,7 +32,7 @@
     毕业设计,用js实现神经网络识别手写字母
 
   Require Map https://github.com/sad-xu/require-map
-    首个工具类npm包,生成nodejs项目的依赖图
+    首个工具类npm包,自动生成nodejs项目中各个文件的依赖关系图
 
 2019三部曲
   
