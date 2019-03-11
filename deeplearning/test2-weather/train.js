@@ -14,6 +14,8 @@ const args = {
   displayEvery: 10, // Log info to the console every _ batches
 }
 
+// JenaWeatherData buildModel trainModel
+
 // 准备数据
 const jenaWeatherData = new JenaWeatherData()
 console.log(`Loading Jena weather data...`)
