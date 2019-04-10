@@ -83,7 +83,11 @@ function init() {
 
 // 定时任务
 const job = new CronJob('0 11 1 * * *', function() {
-  init()
+  try {
+    init()
+  } catch(e) {
+    console.log(e)
+  }
 })
 job.start()
 

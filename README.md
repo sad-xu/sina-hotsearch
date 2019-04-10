@@ -76,6 +76,9 @@
 查看任务
  pm2 list
 
+删除任务
+ pm2 delete id
+
 pm2运行npm
  pm2 start npm --name spider -- run prod-spider
  pm2 start npm --name leadboard -- run prod-leadboard

@@ -92,7 +92,11 @@ console.log('start...')
 
 // 定时任务
 const job = new CronJob('0 */5 * * * *', function() {
-	getData()
+	try {
+		getData()
+	} catch(e) {
+		log.error(err)
+	}
 	console.log(`doing in ${new Date()}`)
 })
 job.start()
