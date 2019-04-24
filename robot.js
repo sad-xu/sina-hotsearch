@@ -7,7 +7,9 @@ const request = require('request')
 const querystring = require('querystring')
 const Login = require('./robot/login.js').Login
 
-let cookie = 'SCF=AldmGDEwDPkD92RXILczZb2G8pPApbPauTIKHBTujc57QXAslK-sLHrWCgsRG1Gl-AQPsxAbIPZRXniM9zY4Ydo.; SUB=_2A25xu1A6DeRhGeFO41AT9CbPyzmIHXVSscbyrDV8PUJbmtBeLRSkkW9NQV6UFUu0kxYJRe2FtiGpn9f3thO4HoSH; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9Whz9ANA37kvuy-dhk3ZZW6c5JpX5K2hUgL.FoM71hzEShn0eh-2dJLoI05LxKML1heLB-BLxKqL1K5L1-eLxK-L1hnL1hqLxKqL1--L1K5LxK-LBonL1hybdNBt; SUHB=0eb9sZ1rRPZAco; SRT=D.QqHBJZPtWOEBi!Mb4cYGS4SLiDEBPDbDRbBu5csHNEYd43iZRebpMERt4EP1RcsrAcPJ4bihTsVuObEdibPFPQ4nT3YSNbHbJ!SrT4WnUZbcJ3MfOqMzUsiz*B.vAflW-P9Rc0lR-ykeDvnJqiQVbiRVPBtS!r3JZPQVqbgVdWiMZ4siOzu4DbmKPWf5ZbBO!mqi-k-WQ!kSFYhJs9TPqSZi49ndDPIJcYPSrnlMcyiiqEf5!POTFtnSdXkJcM1OFyHJDPJ5mkiODEfS4oCI4HJ5mkoODEIi4noIdPJ5mjkODEfU!noTGEJ5mkoODmkI4noNqPJ5mjkOmH6U!noTGb8SmuCWv77; SRF=1556029546; SSOLoginState=1556029546'
+let cookie = 'SCF=Am8IKN_j2CdumcxuoL2cSgQPvmkvEqYbQkBGE062BWklNkVFUw47ZOEYH9RCqiIwkW2jUEVll49e8-32LbVfZ1g.; SUB=_2A25xxAkHDeRhGeFO41AT9CbPyzmIHXVSsH3PrDV8PUJbmtBeLXH8kW9NQV6UFZq7JMv54mZHEg67Dnpjng2lsV1u; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9Whz9ANA37kvuy-dhk3ZZW6c5JpX5K2hUgL.FoM71hzEShn0eh-2dJLoI05LxKML1heLB-BLxKqL1K5L1-eLxK-L1hnL1hqLxKqL1--L1K5LxK-LBonL1hybdNBt; SUHB=0FQ7wTKrZgFLW6; SRT=D.QqHBJZPt5mEhNmMb4cYGS4SLiDEBPDbDRbBu5csHNEYd43izJsBpMERt4EP1RcsrAcPJdmXtTsVuObEdibPFdem3N!s-iOMkd!YESqR3MFunTcueJcoqPZEs*B.vAflW-P9Rc0lR-ykeDvnJqiQVbiRVPBtS!r3JZPQVqbgVdWiMZ4siOzu4DbmKPWf5ZbBO!mqi-k-WQ!kSFYhJs9TPqSZi49ndDPIJcYPSrnlMcyiiqEf5!POTFtnSdXkJcM1OFyHJDPJ5mkiODEfS4oCI4HJ5mkoODEIi4noIdPJ5mjkODEfU!noTGEJ5mkoODmkI4noNqPJ5mjkOmH6U!noTGb8SmuCWv77; SRF=1556117847; SSOLoginState=1556117847'
+// let cookie = 'SINAGLOBAL=5375517568265.484.1504781249536; un=1031568754@qq.com; UOR=,,login.sina.com.cn; wvr=6; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9W5QFdJJgrlNns25j79f.D.05JpX5KMhUgL.Fo-0e05NS0q7eKn2dJLoIEXLxK-LBKqL1K.LxKnL1K.LB-zLxK-L1K5L1hnLxKMLBKML12BLxK-LB-BL1K5t; ALF=1587650468; SSOLoginState=1556114470; SCF=AlX4vhQtCIlaI07fawGdHyf8Og8f2-IWerfEHarvUMUkprrSzU4APb1DJ43iX8LogtyO4s2Gh5TXOuCMM6SNWtM.; SUB=_2A25xxBx5DeRhGeNN6FIW9yjMyjSIHXVSsAqxrDV8PUNbmtBeLWnykW9NSbuFeSfm0thdv1F7FjJVW-7H6rEucRys; SUHB=0XDl2MN7pnQ_7K; _s_tentry=login.sina.com.cn; Apache=8637723983963.937.1556114582335; ULV=1556114582362:420:6:2:8637723983963.937.1556114582335:1556031267019; webim_unReadCount=%7B%22time%22%3A1556118993360%2C%22dm_pub_total%22%3A0%2C%22chat_group_pc%22%3A0%2C%22allcountNum%22%3A0%2C%22msgbox%22%3A0%7D'
+// let cookie = ''
 
 // 登陆 获取cookie
 function getCookie() {
@@ -16,6 +18,7 @@ function getCookie() {
       .init()
       .then(res => {
         cookie = res
+        console.log(cookie)
         resolve(res)
       }).catch(err => {
         reject(err)
@@ -50,13 +53,18 @@ function hasPermission() {
         _t: 0
       })
     }, (error, response, body) => {
-      if (!error && response.statusCode === 200) {
-        response.setEncoding('utf-8');
+      if (!error) {
+        response.setEncoding('utf-8')
+        console.log('res:',response.body)
+        if (response.body.length === 0) return resolve(false)
         let data = JSON.parse(response.body)
         if (data.code === '100000') {
           resolve(true)
-        } else reject(false)
-      } else reject(false)
+        } else resolve(false)
+      } else {
+        console.log(error, response.statusCode)
+        resolve(false)
+      } 
     })
   })
 }
@@ -67,11 +75,13 @@ function uploadPic(path) {
     fs.readFile(path, 'base64', (err, imgBase64Data) => {
       if (err) console.log(err)
       request({
-        url: `https://picupload.weibo.com/interface/pic_upload.php?mime=image%2Fjpeg&data=base64&url=0&markpos=1&logo=&nick=0&marks=0&app=miniblog&s=rdxt&pri=null&file_source=1&callback=STK_ijax_155603547178672`,
+        url: `https://picupload.weibo.com/interface/pic_upload.php?mime=image%2Fjpeg&data=base64&url=0&markpos=1&logo=&nick=0&marks=0&app=miniblog&s=rdxt&pri=null&file_source=1&callback=STK_ijax_${new Date().getTime().toString() + 33}`,
         method: 'POST',
         headers: {
           "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:48.0) Gecko/20100101 Firefox/48.0",
-          'Accept-Language': 'en-US,en;q=0.5',
+          'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+          'Accept-Encoding': 'gzip, deflate, br',
           'Content-Type': 'application/x-www-form-urlencoded',
           'Connection': 'Keep-Alive',
           "Referer": 'https://weibo.com/u/5330776018/home',
@@ -79,18 +89,19 @@ function uploadPic(path) {
           'Origin': 'https://weibo.com',
           'Upgrade-Insecure-Requests': 1,
           'Cache-Control': 'max-age=0',
-          'Content-Length': 4259,
+          // 'followRedirect': false,
+          // 'followAllRedirects': false,
+          // 'removeRefererHeader': true,
           'cookie': cookie
         },
-        gzip: true,
         credentials: "include",
         body: querystring.stringify({
           b64_data: encodeURIComponent(imgBase64Data.toString())
         })
       }, (error, response, body) => {
         if (!error) {
-          console.log(response.headers, body)
-          resolve('s')
+          console.log(response.rawHeaders, body)
+          resolve()
         } else reject('上传图片失败')
       })
     })
@@ -99,13 +110,14 @@ function uploadPic(path) {
 
 
 (async () => {
-  // const isLogin = await hasPermission()
-  // if (!isLogin) { // token失效，重新登录
-  //   console.log('重新登录')
-  //   await getCookie()
-  // }
-  // 发微博
-  await uploadPic('./robot/testpic2.png')
+    // const isLogin = await hasPermission()
+    // console.log(isLogin)    
+    // if (!isLogin) { // token失效，重新登录
+    //   console.log('重新登录')
+    //   await getCookie()
+    // }
+    // 发微博
+    await uploadPic('./robot/testpic1.jpg')
 })()
 
 
