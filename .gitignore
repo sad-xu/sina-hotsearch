@@ -1,6 +1,8 @@
 .DS_Store
 node_modules/
 logs/
+robot/*.png
+robot/*.jpg
 deeplearning/test2-weather/*.csv
 npm-debug.log*
 yarn-debug.log*

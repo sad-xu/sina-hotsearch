@@ -7,9 +7,7 @@ const request = require('request')
 const querystring = require('querystring')
 const Login = require('./robot/login.js').Login
 
-let cookie = 'SCF=Am8IKN_j2CdumcxuoL2cSgQPvmkvEqYbQkBGE062BWklNkVFUw47ZOEYH9RCqiIwkW2jUEVll49e8-32LbVfZ1g.; SUB=_2A25xxAkHDeRhGeFO41AT9CbPyzmIHXVSsH3PrDV8PUJbmtBeLXH8kW9NQV6UFZq7JMv54mZHEg67Dnpjng2lsV1u; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9Whz9ANA37kvuy-dhk3ZZW6c5JpX5K2hUgL.FoM71hzEShn0eh-2dJLoI05LxKML1heLB-BLxKqL1K5L1-eLxK-L1hnL1hqLxKqL1--L1K5LxK-LBonL1hybdNBt; SUHB=0FQ7wTKrZgFLW6; SRT=D.QqHBJZPt5mEhNmMb4cYGS4SLiDEBPDbDRbBu5csHNEYd43izJsBpMERt4EP1RcsrAcPJdmXtTsVuObEdibPFdem3N!s-iOMkd!YESqR3MFunTcueJcoqPZEs*B.vAflW-P9Rc0lR-ykeDvnJqiQVbiRVPBtS!r3JZPQVqbgVdWiMZ4siOzu4DbmKPWf5ZbBO!mqi-k-WQ!kSFYhJs9TPqSZi49ndDPIJcYPSrnlMcyiiqEf5!POTFtnSdXkJcM1OFyHJDPJ5mkiODEfS4oCI4HJ5mkoODEIi4noIdPJ5mjkODEfU!noTGEJ5mkoODmkI4noNqPJ5mjkOmH6U!noTGb8SmuCWv77; SRF=1556117847; SSOLoginState=1556117847'
-// let cookie = 'SINAGLOBAL=5375517568265.484.1504781249536; un=1031568754@qq.com; UOR=,,login.sina.com.cn; wvr=6; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9W5QFdJJgrlNns25j79f.D.05JpX5KMhUgL.Fo-0e05NS0q7eKn2dJLoIEXLxK-LBKqL1K.LxKnL1K.LB-zLxK-L1K5L1hnLxKMLBKML12BLxK-LB-BL1K5t; ALF=1587650468; SSOLoginState=1556114470; SCF=AlX4vhQtCIlaI07fawGdHyf8Og8f2-IWerfEHarvUMUkprrSzU4APb1DJ43iX8LogtyO4s2Gh5TXOuCMM6SNWtM.; SUB=_2A25xxBx5DeRhGeNN6FIW9yjMyjSIHXVSsAqxrDV8PUNbmtBeLWnykW9NSbuFeSfm0thdv1F7FjJVW-7H6rEucRys; SUHB=0XDl2MN7pnQ_7K; _s_tentry=login.sina.com.cn; Apache=8637723983963.937.1556114582335; ULV=1556114582362:420:6:2:8637723983963.937.1556114582335:1556031267019; webim_unReadCount=%7B%22time%22%3A1556118993360%2C%22dm_pub_total%22%3A0%2C%22chat_group_pc%22%3A0%2C%22allcountNum%22%3A0%2C%22msgbox%22%3A0%7D'
-// let cookie = ''
+let cookie = 'SCF=AoQVLVPbqBwDmmpAtHTWkGN1OoYhH-T7VNU5sPrstP00jkZrqshGlRO2kTLmvBD_kP8da3WWGqCCXjVDAqpobLg.; SUB=_2A25xx7dSDeRhGeFO41AT9CbPyzmIHXVStK-arDV8PUJbmtBeLW_ikW9NQV6UFU7nokCty6AFfWl1o4wGaH-zbs-v; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9Whz9ANA37kvuy-dhk3ZZW6c5JpX5K2hUgL.FoM71hzEShn0eh-2dJLoI05LxKML1heLB-BLxKqL1K5L1-eLxK-L1hnL1hqLxKqL1--L1K5LxK-LBonL1hybdNBt; SUHB=0BL4uj9HyQ5QoV; SRT=D.QqHBJZPt5DW!4rMb4cYGS4SLiDEBPDbDRbBu5csHNEYd43MIIdEpMERt4EP1RcsrAcPJPsy9TsVuObEdibPFPOWlU-kDWG!-A4ScP-noUqM3M-EzIQ98Vps-*B.vAflW-P9Rc0lR-ykeDvnJqiQVbiRVPBtS!r3JZPQVqbgVdWiMZ4siOzu4DbmKPWf5ZbBO!mqi-k-WQ!kSFYhJs9TPqSZi49ndDPIJcYPSrnlMcyiiqEf5!POTFtnSdXkJcM1OFyHJDPJ5mkiODEfS4oCI4HJ5mkoODEIi4noIdPJ5mjkODEfU!noTGEJ5mkoODmkI4noNqPJ5mjkOmH6U!noTGb8SmuCWv77; SRF=1556334338; SSOLoginState=1556334338'
 
 // 登陆 获取cookie
 function getCookie() {
@@ -70,44 +68,118 @@ function hasPermission() {
 }
 
 // 上传图片
+// http://picupload.service.weibo.com/interface/pic_upload.php?ori=1&mime=image%2Fjpeg&data=base64&url=0&markpos=1&logo=&nick=0&marks=1&app=miniblog
+// `https://picupload.weibo.com/interface/pic_upload.php?mime=image%2Fjpeg&data=base64&url=0&markpos=1&logo=&nick=0&marks=0&app=miniblog&s=rdxt&pri=null&file_source=1&callback=STK_ijax_${new Date().getTime().toString() + 33}`
 function uploadPic(path) {
   return new Promise((resolve, reject) => {
     fs.readFile(path, 'base64', (err, imgBase64Data) => {
-      if (err) console.log(err)
-      request({
-        url: `https://picupload.weibo.com/interface/pic_upload.php?mime=image%2Fjpeg&data=base64&url=0&markpos=1&logo=&nick=0&marks=0&app=miniblog&s=rdxt&pri=null&file_source=1&callback=STK_ijax_${new Date().getTime().toString() + 33}`,
-        method: 'POST',
-        headers: {
-          "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:48.0) Gecko/20100101 Firefox/48.0",
-          'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
-          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
-          'Accept-Encoding': 'gzip, deflate, br',
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Connection': 'Keep-Alive',
-          "Referer": 'https://weibo.com/u/5330776018/home',
-          'Host': 'picupload.weibo.com',
-          'Origin': 'https://weibo.com',
-          'Upgrade-Insecure-Requests': 1,
-          'Cache-Control': 'max-age=0',
-          // 'followRedirect': false,
-          // 'followAllRedirects': false,
-          // 'removeRefererHeader': true,
-          'cookie': cookie
-        },
-        credentials: "include",
-        body: querystring.stringify({
-          b64_data: encodeURIComponent(imgBase64Data.toString())
+      if (err) {
+        reject(err)
+      } else {
+        request({
+          url: 'http://picupload.service.weibo.com/interface/pic_upload.php?ori=1&mime=image%2Fjpeg&data=base64&url=0&markpos=1&logo=&nick=0&marks=1&app=miniblog',
+          method: 'POST',
+          headers: {
+            "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:48.0) Gecko/20100101 Firefox/48.0",
+            'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+            'Accept-Encoding': 'gzip, deflate, br',
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Connection': 'Keep-Alive',
+            'Cache-Control': 'max-age=0',
+            'Cookie': cookie
+          },
+          credentials: "include",
+          body: querystring.stringify({
+            b64_data: imgBase64Data.toString()
+          })
+        }, (error, response, body) => {
+          if (!error) {
+            let { data } = JSON.parse(response.body.replace(/([\s\S]*)<\/script>/g, ''));
+            let imgPid = data.pics.pic_1.pid
+            resolve(imgPid)
+          } else reject('上传图片失败')
         })
-      }, (error, response, body) => {
-        if (!error) {
-          console.log(response.rawHeaders, body)
-          resolve()
-        } else reject('上传图片失败')
-      })
+      }
     })
   })
 }
 
+// 发送微博
+function sendMsg(msg, picArr = []) {
+  return new Promise((resolve, reject) => {
+    request({
+      url: `https://weibo.com/aj/mblog/add?ajwvr=6&__rnd=${new Date().getTime()}`,
+      method: 'POST',
+      headers: {
+        'Accept': '*/*',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7',
+        'Connection': 'keep-alive',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Cookie': cookie,
+        'Host': 'weibo.com',
+        'Origin': 'https://weibo.com',
+        'Referer': 'https://weibo.com',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      credentials: 'include',
+      body: querystring.stringify({
+        'location': 'v6_content_home',
+        'text': msg,
+        'appkey': '',
+        'style_type': '1',
+        'pic_id': picArr.join('|'),
+        'tid': '',
+        'pdetail': '',
+        'mid': '',
+        'isReEdit': 'false',
+        'rank': '0',
+        'rankid': '',
+        'module': 'stissue',
+        'pub_source': 'main_',
+        'pub_type': 'dialog',
+        'isPri': '0',
+        '_t': '0'
+      })
+    }, (error, response, body) => {
+      if (!error) {
+        console.log('send over')
+        resolve()
+      } else reject('send failed')
+    })
+  })
+}
+
+// 正常微博 [{text, img}]
+async function doSend(data) {
+  let msg = ''
+  let picArr = []
+  for (let i = 0; i < data.length; i++) {
+    msg += `#${data[i].text}#\n`
+    let picId = await uploadPic(data[i].img)
+    picArr.push(picId)
+  }
+  msg += '[吃瓜][吃瓜][吃瓜]'
+  await sendMsg(msg, picArr)
+}
+
+// 失败微博 
+async function failAction() {
+  const imgId1 = '007Jiojnly1g2h6e6ul5kj31hc0u043k'
+  const imgId2 = '007Jiojnly1g2h6hea3ywj31hc0u043k'
+  const imgId3 = '007Jiojnly1g2h6i4dx20j31hc0u043k'
+  const msg = `失敗した失敗した失敗した失敗した失敗した
+失敗した失敗した失敗した失敗した失敗した
+失敗した失敗した失敗した失敗した失敗した
+失敗した失敗した失敗した失敗した失敗した
+
+あたしは失敗した失敗した失敗した失敗した
+失敗した失敗した失敗した失敗した失敗した
+失敗した失敗した失敗したあたしは失敗`
+  await sendMsg(msg, [imgId1, imgId2, imgId3])
+}
 
 (async () => {
     // const isLogin = await hasPermission()
@@ -116,13 +188,40 @@ function uploadPic(path) {
     //   console.log('重新登录')
     //   await getCookie()
     // }
-    // 发微博
-    await uploadPic('./robot/testpic1.jpg')
+
+    // 上传图片
+    // let imgId = await uploadPic('./robot/Failed.jpg')
+
+    // 发送微博
+    // await sendMsg('test 1', ['007Jiojnly1g2h0jyvljvj301y01yt8r'])
+
+
+    // 正常发送
+    // doSend([{
+    //   text: 'keywords1-xixi(๑´ㅂ`๑)？',
+    //   img: './robot/testpic1.jpg'
+    // }, {
+    //   text: 'keywords2-嘻嘻',
+    //   img: './robot/testpic2.jpg'
+    // }])
+    // 异常发送
+    // await failAction()
 })()
 
 
+// 换行 \n 
 
 
+/*
+失敗した失敗した失敗した失敗した失敗した
+失敗した失敗した失敗した失敗した失敗した
+失敗した失敗した失敗した失敗した失敗した
+失敗した失敗した失敗した失敗した失敗した
+
+あたしは失敗した失敗した失敗した失敗した
+失敗した失敗した失敗した失敗した失敗した
+失敗した失敗した失敗したあたしは失敗
+*/
 
 
 
