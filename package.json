@@ -13,7 +13,9 @@
     "dev-leadboard": "node leadboard.js",
     "prod-leadboard": "cross-env NODE_ENV=production node leadboard.js",
     "dev-commitlog": "node commitlog.js",
-    "prod-commitlog": "cross-env NODE_ENV=production node commitlog.js"
+    "prod-commitlog": "cross-env NODE_ENV=production node commitlog.js",
+    "dev-robot": "node robot.js",
+    "prod-robot": "cross-env NODE_ENV=production node robot.js"
   },
   "license": "ISC",
   "dependencies": {
