@@ -1,30 +1,7 @@
 const fs = require('fs')
 const exporter = require('highcharts-export-server')
 
-let exportSettings = {
-  type: 'png',
-  options: {
-    title: {
-      text: 'My Chart'
-    },
-    xAxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "Mar", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-    },
-    series: [{
-      type: 'line',
-      data: [1, 3, 2, 4]
-    }]
-  }
-}
-
 exporter.initPool()
-// exporter.export(exportSettings, function (err, res) {
-//   fs.writeFile('expChart.png', Buffer.from(res.data, 'base64'), err => {
-//     if (err) console.log(err)
-//     else console.log()
-//   })
-//   exporter.killPool()
-// })
 
 // { desc, timeline } ==> { desc, imgData } 
 function getChartData(data, color = '#7cb5ec') {
@@ -98,6 +75,7 @@ function getChartData(data, color = '#7cb5ec') {
           marker: {
             radius: 0
           },
+          lineWidth: 4,
           color: color,
           data: timeList.map(obj => [obj.t * 1000 + 28800000, obj.n])
         }]

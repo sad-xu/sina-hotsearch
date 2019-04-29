@@ -84,3 +84,4 @@ pm2运行npm
  pm2 start npm --name leadboard -- run prod-leadboard
  pm2 start npm --name commitlog -- run prod-commitlog
  pm2 start npm --name server -- run prod-server
+ pm2 start npm --name robot -- run prod-robot

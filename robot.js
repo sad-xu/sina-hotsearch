@@ -74,21 +74,25 @@ async function failAction() {
 // 一次流程
 async function init() {
   try {
-    // 查询数据库
-    let originData = await getOriginData()
-    // 生成base64数据
-    let chartData = []
-    for (let i = 0; i < originData.length; i++) {
-      let color = ''
-      if (i <= 2) color = '#ff576b'
-      else if (i > 2 && i < 6) color = '#ffb642'
-      else color = '#7cb5ec'
-      chartData.push(await getChartData(originData[i], color))
-    }
     // 登录 获取cookie
-    cookie = await weibo.getCookie()
-    // 上传图片，发送微博
-    await doSend(chartData)
+    await weibo.getCookie().then(cookie => {
+      cookie = cookie
+    }).then(async () => {
+      // 查询数据库
+      let originData = await getOriginData()
+      // 生成base64数据
+      let chartData = []
+      for (let i = 0; i < originData.length; i++) {
+        let color = ''
+        if (i <= 2) color = '#ff576b'
+        else if (i > 2 && i < 6) color = '#ffb642'
+        else color = '#7cb5ec'
+        chartData.push(await getChartData(originData[i], color))
+      }
+      console.log(chartData.map(item => item.desc))
+      // 上传图片，发送微博
+      await doSend(chartData)
+    })    
   } catch(err) {
     console.log(err)
   }
@@ -98,25 +102,21 @@ async function init() {
   
 
 // 定时任务
-// init().then(res => {
-//   console.log('over')
+// init()
+
+// weibo.getCookie().then(res => {
+//   console.log(res)
 // })
-weibo.getCookie().then(res => {
-  console.log(res)
+
+const job = new CronJob('0 32 11 * * *', function() {
+  try {
+    init()
+  } catch(e) {
+    console.log(e)
+  }
 })
-
-// const job = new CronJob('0 32 11 * * *', function() {
-//   try {
-//     init()
-//   } catch(e) {
-//     console.log(e)
-//   }
-// })
-// console.log('cron')
-// job.start()
-
-  // failAction()
-
+console.log('cron')
+job.start()
 
 
     // 登录状态验证

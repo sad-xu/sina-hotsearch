@@ -1,3 +1,5 @@
+const fs = require('fs')
+const readline = require('readline')
 const request = require('request')
 const querystring = require('querystring')
 const encodePostData = require('./encodePostData.js')
@@ -11,6 +13,7 @@ class Login {
     // 正式登陆地址
     this.loginUrl = 'http://login.sina.com.cn/sso/login.php?client=ssologin.js(v1.4.18)'
     this.preLoginData = ''
+    this.pinCode = null
   }
 
   init() {
@@ -19,6 +22,11 @@ class Login {
       try {
         let preLoginInitData = await this.getPreLoginData()
         this.preLoginData = await this.parsePreLoginData(preLoginInitData)
+        // // 验证码
+        // if (this.preLoginData.showpin == 1) {
+        //   this.getPinImg()
+        //   this.pinCode = await this.inputPinCode()
+        // }
         const responseBody = await this.postData()
         const finnalLoginUrl = await this.getFinnalLoginUrl(responseBody)
         return await this.getCookie(finnalLoginUrl)
@@ -68,7 +76,9 @@ class Login {
       this.preLoginData.servertime,
       this.preLoginData.nonce, 
       this.preLoginData.pubkey, 
-      this.preLoginData.rsakv
+      this.preLoginData.rsakv,
+      this.pinCode, 
+      this.preLoginData.pcid
     )
     const options = {
       method: 'POST',
@@ -116,6 +126,26 @@ class Login {
         } else {
           reject('最后一步失败')
         }
+      })
+    })
+  }
+
+  // 获取验证码图片
+  getPinImg() {
+    let pinImgUrl = `http://login.sina.com.cn/cgi/pin.php?r=${Math.floor(Math.random() * 1e8)}&s=0&p=${this.preLoginData['pcid']}`
+    request(pinImgUrl).pipe(fs.createWriteStream('./pinCode.png'));
+  }
+
+  inputPinCode() {
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout
+    })
+    return new Promise((resolve, reject) => {
+      rl.question('请输入验证码 \n', (pinCode) => {
+        console.log(`你输入的验证码为：${pinCode}`)
+        rl.close()
+        resolve(pinCode)
       })
     })
   }
