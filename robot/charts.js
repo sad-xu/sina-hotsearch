@@ -1,7 +1,15 @@
 const fs = require('fs')
 const exporter = require('highcharts-export-server')
 
-exporter.initPool()
+exports.openPool = function() {
+  console.log('浏览器开启')
+  exporter.initPool()
+}
+
+exports.closePool = function() {
+  console.log('浏览关闭')
+  exporter.killPool()
+}
 
 // { desc, timeline } ==> { desc, imgData } 
 function getChartData(data, color = '#7cb5ec') {
@@ -85,8 +93,9 @@ function getChartData(data, color = '#7cb5ec') {
         reject(err)
       } else {
         // test
-        // fs.writeFile(`${desc}.png`, Buffer.from(res.data, 'base64'), err => {
+        // fs.writeFile(`./${desc}.png`, Buffer.from(res.data, 'base64'), err => {
         //   if (err) console.log(err)
+        //     else console.log(res.data)
         // })
         resolve({ desc: desc, imgData: res.data })
       }

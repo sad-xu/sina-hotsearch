@@ -5,7 +5,7 @@
 const request = require('request')
 const querystring = require('querystring')
 const weibo = require('./robot/weibo.js')
-const getChartData = require('./robot/charts.js').getChartData
+const charts = require('./robot/charts.js')
 
 const CronJob = require('cron').CronJob
 const mongoose = require('mongoose')
@@ -75,24 +75,26 @@ async function failAction() {
 async function init() {
   try {
     // 登录 获取cookie
-    await weibo.getCookie().then(cookie => {
-      cookie = cookie
+    await weibo.getCookie().then(newcookie => {
+      cookie = newcookie
     }).then(async () => {
       // 查询数据库
       let originData = await getOriginData()
       // 生成base64数据
       let chartData = []
+      charts.openPool()
       for (let i = 0; i < originData.length; i++) {
         let color = ''
         if (i <= 2) color = '#ff576b'
         else if (i > 2 && i < 6) color = '#ffb642'
         else color = '#7cb5ec'
-        chartData.push(await getChartData(originData[i], color))
+        chartData.push(await charts.getChartData(originData[i], color))
       }
-      console.log(chartData.map(item => item.desc))
+      charts.closePool()
+      console.log(chartData.map(item => [item.desc, item.imgData.length]))
       // 上传图片，发送微博
       await doSend(chartData)
-    })    
+    })
   } catch(err) {
     console.log(err)
   }
