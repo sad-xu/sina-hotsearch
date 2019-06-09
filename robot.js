@@ -47,7 +47,7 @@ async function doSend(data) {
   let msg = ''
   let picArr = []
   for (let i = 0; i < data.length; i++) {
-    msg += `#${data[i].desc}#\n`
+    msg += `${data[i].desc}\n`
     let picId = await weibo.uploadPic(data[i].imgData, cookie)
     picArr.push(picId)
   }

@@ -46,6 +46,24 @@
 
   保密
 
+### crontab
+
+定时任务列表 crontab -l
+编辑 
+  crontab -e
+  i 编辑模式
+  esc :wq 退出编辑+保存
+日志 cat /var/log/cron
+
+### shell
+
+新建 touch test.sh
+编辑 vi test.sh
+第一行 #!/bin/sh
+路径  cd /home/admin/hotsearch-analyst
+执行  npm run ...
+赋予可执行权限 chmod +x test.sh
+
 ### redis 相关
 
 启动服务

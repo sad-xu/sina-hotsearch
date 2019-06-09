@@ -1,4 +1,9 @@
 
+const client = require('./utils/redis.js')
+client.set('testTime', new Date().toString(), err => {
+  client.quit()
+})
+/*
 // 两个项目的 commit log 数据
 // 只存redis 每天6:01更新 
 const CronJob = require('cron').CronJob
@@ -62,3 +67,4 @@ const job = new CronJob('0 1 6 * * *', function() {
 })
 job.start()
 
+*/
